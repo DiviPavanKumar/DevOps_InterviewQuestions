@@ -452,6 +452,10 @@ What's the difference between `git merge` and `git rebase`?
 	Merge: Preserves the commit history of both branches, creating a new merge commit. 
 	Rebase: Rewrites commit history, proving a liner and clear history.
 
+What's the difference between `git pull` and `git fetch`?
+	* `git pull`: Downloads updates from the remote repository and automatically merges them into your current local branch.
+	* `git fetch`: Downloads updates from the remote repository but doesn't merge them into your local branch.
+
 Explain about GIT Branching in your project:
 	In a Git project, branching allows multiple developers to work on different features or fixes simultaneously without interfering with each other’s work. Typically:
 		1. Main branch (main or master): The stable production-ready branch.
@@ -473,6 +477,9 @@ What is the git workflow?
 
 	This workflow keeps the main branch stable while allowing for parallel development.
 
+What is git cherry pick?
+	Git cherry-pick is a command that lets you apply a specific commit from one branch to another. You pick a commit by its ID, and Git copies its changes into your current branch.
+	
 	
 Jenkins:
 
@@ -485,6 +492,28 @@ How to run a particular stage in jenkins pipeline?
 
   To run a particular stage in a Jenkins pipeline, you can use the "Build with Parameters" option and specify the stage using the `when` condition or manually trigger the 
   specific stage with `input` step or by using a script in the pipeline. Another approach is to comment out the other stages temporarily and run the desired one.
+
+While running a job in jenkins, build got failed. How will you resolve that?
+	To resolve a failed Jenkins build:
+
+		1. Check Logs: Review the build console output for error details.
+		2. Identify Cause: Look for issues like syntax errors, missing dependencies, or configuration problems.
+		3. Fix Issue: Update code, pipeline script, or environment (e.g., install missing plugins or dependencies).
+		4. Test Locally: Reproduce and verify the fix locally if possible.
+		5. Retry Build: Trigger the job again in Jenkins.
+		6. Monitor: Ensure the build completes successfully or repeat steps if it fails again.
+	
+		What type of error we may get?
+		Common errors in a failed Jenkins build include:
+
+		1. Syntax Errors: Incorrect code or script syntax in the pipeline or application.
+		2. Dependency Issues: Missing libraries, packages, or plugins required for the build.
+		3. Configuration Errors: Wrong environment variables, credentials, or Jenkins settings.
+		4. Network Issues: Failure to connect to repositories, APIs, or external services.
+		5. Permission Errors: Insufficient access to files, directories, or resources.
+		6. Resource Limits: Insufficient memory, CPU, or disk space.
+		7. Test Failures: Unit or integration tests failing due to code issues.
+		8. Timeout Errors: Build taking too long, exceeding configured time limits.
 
 Docker:
 
@@ -537,6 +566,28 @@ What's the difference between COPY and ADD in Docker?
 	  automatically extracting .tar archives.
 	Use COPY by default, and use ADD only when you need its additional features.
 
+What's the difference between ARG and ENV in Docker?
+	• ARG:
+		o Used in Dockerfile with ARG instruction.
+		o Only available during build time (docker build).
+		o Passed at build time using --build-arg (e.g., docker build --build-arg
+		  VAR=value).
+		o Not available in the running container unless set as ENV.
+	• ENV:
+		o Used in Dockerfile with ENV instruction.
+		o Available during build time and runtime (inside the container).
+		o Can be overridden at runtime using -e (e.g., docker run -e VAR=value).
+	• Can ARG be passed at runtime?
+		o No, ARG is only for build time. It cannot be passed during docker run.
+		  Use ENV for runtime variables. 
+	
+Where you used docker to solve a specific problem?
+	I used Docker to create consistent development environments for a team, ensuring all developers had the same dependencies and versions, eliminating "works on my machine" issues.
+	
+There are multiple stopped containers and unused network taking up spaces. How you will clean up these resources effectively?
+	$ docker system prune -a
+	Be cautious with prune commands as they permanently delete resources.
+	
 Kubernetes:
 
 Architecture of Kubernetes?
@@ -560,4 +611,48 @@ What's the difference between Kubernetes deployment and Statefulset?
 
 	* StatefulSet: Used for stateful applications, where each pod has a unique identity, persistent storage, and stable network identity. It ensures proper ordering and  stable storage for each pod.
 
+What is namespace?
+	namespaces are used for dividing cluster resources between multiple users. They are meant for environments where there are many users spread across projects or teams and provide a scope of resources.
+
+What are the different services available within kubernetes?
+	Kubernetes services include:
+
+		1. ClusterIP: Default service, exposes a pod internally within the cluster.
+		2. NodePort: Exposes the service on each node's IP at a static port.
+		3. LoadBalancer: Exposes the service externally using a cloud provider's load balancer.
+		4. ExternalName: Maps a service to an external DNS name without creating a proxy.
+		5. Headless: Allows direct access to individual pods without a single IP, often used for stateful applications.
+		
+What is the types deployment stategy of kubernetes?
+	Kubernetes deployment strategies include:
+
+		1. Recreate: Terminates all old pods and creates new ones.
+		2. Rolling Update: Gradually replaces old pods with new ones, ensuring minimal downtime.
+		3. Blue/Green: Deploys new version alongside old, then switches traffic to new version.
+		4. Canary: Deploys new version to a small subset of users before full rollout.
+		5. A/B Testing: Tests new version with specific user groups based on conditions.
+
+Ansible:
+
+How to run a specific task on Ansible Playbook which contains 10 tasks?
+	Tag the task in the playbook:
+
+	- name: Example task
+	  ansible.builtin.debug:
+		msg: "Running specific task"
+	  tags: mytask
+	  
+	Run the playbook with the --tags option:
+
+	ansible-playbook playbook.yml --tags mytask
+
+	Note: Only tasks with the specified tag (mytask) will run.
+	
+Terraform:
+
+What is statefile?
+    A statefile in Terraform is a JSON file (terraform.tfstate) that tracks the current state of your infrastructure. It records resource configurations, attributes, and dependencies, allowing Terraform to manage and update resources accurately.	
+	statefile contains the history of deployment.
+When state file will be created?
+    The Terraform statefile (terraform.tfstate) is created when you run `terraform apply` or `terraform init` followed by `terraform plan` and `terraform apply` for the first time in a project directory.	
 
