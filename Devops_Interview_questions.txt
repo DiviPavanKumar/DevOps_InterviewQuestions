@@ -446,6 +446,34 @@ What will happen if you do `git fetch`?
   `git fetch` updates your local repository with the latest changes from the remote repository, but it doesn't modify your working directory or merge those changes into your current branch. 
   It just pulls the new commits and data.
 
+What's the difference between `git merge` and `git rebase`?
+	* `git merge` combines changes from one branch into another, creating a new merge commit. It preserves the history of both branches.
+	* `git rebase` moves or "replays" commits from one branch onto another, creating a linear history without merge commits. It rewrites the commit history.
+	Merge: Preserves the commit history of both branches, creating a new merge commit. 
+	Rebase: Rewrites commit history, proving a liner and clear history.
+
+Explain about GIT Branching in your project:
+	In a Git project, branching allows multiple developers to work on different features or fixes simultaneously without interfering with each other’s work. Typically:
+		1. Main branch (main or master): The stable production-ready branch.
+		2. Feature branches: Used for developing new features (e.g., feature/login-page).
+		3. Bugfix branches: For fixing bugs (e.g., bugfix/crash-on-login).
+		4. Release branches: For preparing production releases (e.g., release/v1.0).
+		5. Hotfix branches: For urgent fixes to production (e.g., hotfix/critical-fix).
+	After work on a branch is complete, it's merged back into the main branch.
+
+What is the git workflow?
+	A common Git workflow involves the following steps:
+
+		1. Clone the repository: git clone <repo-url>.
+		2. Create a new branch for your work: git checkout -b <branch-name>.
+		3. Make changes to the code and commit them: git add . and git commit -m "message".
+		4. Push your branch to the remote repository: git push origin <branch-name>.
+		5. Create a Pull Request (PR) to merge your changes into the main branch.
+		6. Review and merge the PR after approval.
+
+	This workflow keeps the main branch stable while allowing for parallel development.
+
+	
 Jenkins:
 
 What is the difference between continuous Delivery and Deployment?
@@ -526,5 +554,10 @@ Architecture of Kubernetes?
 		* Container Runtime: Runs containers (e.g., Docker, containerd).
 
 	The Control Plane manages the cluster, while Nodes run the workloads.
+
+What's the difference between Kubernetes deployment and Statefulset?
+	* Deployment: Used for stateless applications, where each pod is identical and can be replaced easily. It ensures desired replicas are running and updates pods in a rolling manner.
+
+	* StatefulSet: Used for stateful applications, where each pod has a unique identity, persistent storage, and stable network identity. It ensures proper ordering and  stable storage for each pod.
 
 
