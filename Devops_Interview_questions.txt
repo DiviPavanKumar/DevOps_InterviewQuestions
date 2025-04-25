@@ -656,3 +656,86 @@ What is statefile?
 When state file will be created?
     The Terraform statefile (terraform.tfstate) is created when you run `terraform apply` or `terraform init` followed by `terraform plan` and `terraform apply` for the first time in a project directory.	
 
+----------------------------------------------------------------------------------------------------------------------
+
+#Docker Scenario-Based Interview Questions & Answers:
+
+# Scenario_1
+	You have a docker container running a web server, but you need to update the application code inside it.
+	How would you approch this?
+	
+	Approach:
+		1. Update the application code in the project directory.
+		2. Rebuild the Docker image with the updated code: docker build -t image-name .
+		3. Stop and remove the old container: docker stop container-name && docker rm container-name
+		4. Run a new container with the updated image: docker run -d -p port:port image-name
+		5. Alternatively, use a volume to mount updated code without rebuilding: docker run -v /local/code:/container/code ...
+
+# Scenario_2
+	Your team is deploying a microservices architecture using Docker containers.
+	How would you orchestrate and manage these containers effectively?
+	
+	Approach:
+		1. Use Kubernetes or Docker Compose for orchestration.
+			* Docker Compose: Define services in docker-compose.yml for local development.
+			* Kubernetes: Use deployments, services, and ingress for production.
+		2. Manage networking with service discovery and load balancing.
+		3. Monitor with tools like Prometheus and Grafana.
+		4. Automate deployments with CI/CD pipelines (e.g., Jenkins, GitLab CI).
+
+# Scenario_3
+	You have encountered a problem where a Docker container keeps crashing without any clear error message.
+	How would you troubleshoot and diagnose this issue?
+	
+	Approach:
+		1. Check container logs: docker logs container-name
+		2. Inspect container details: docker inspect container-name
+		3. Run the container interactively: docker run -it image-name /bin/sh to debug.
+		4. Verify resource limits (CPU, memory) and configuration (e.g., env variables).
+		5. Review application errors or missing dependencies.
+		6. Test with a minimal setup to isolate the issue.
+
+# Scenario_4
+	Your team needs to share data between multiple Docker containers.
+	How would you accomplish this while maintaining isolation between the containers?
+	
+	Approach:
+		1. Use Docker Volumes to share data: docker volume create shared-volume
+		2. Mount the volume to multiple containers: docker run -v shared-volume:/data ...
+		3. Alternatively, use a shared network for communication (e.g., via APIs).
+		4. Ensure proper permissions and isolation with user namespaces and access controls.
+
+# Scenario_5
+	You need to ensure that your Docker containers are secure and compliant with company policies.
+	What security best practices would you implement?
+	
+	Best Practices:
+		1. Use minimal base images (e.g., alpine).
+		2. Scan images for vulnerabilities: docker scan image-name
+		3. Run containers as non-root users: USER nonroot in Dockerfile.
+		4. Limit container privileges: Use --cap-drop and --read-only flags.
+		5. Enable Docker Content Trust for image signing.
+		6. Use secrets management for sensitive data (e.g., Docker secrets or Kubernetes secrets).
+		7. Regularly update images and apply security patches.
+
+#Kubernetes Scenario-Based Interview Questions & Answers:
+
+# Scenario_1
+	Your company is migrating its monolithic application to a microservices architecture on Kubernetes. 
+	How would you plan and execute this migration?
+# Scenario_2 
+	You have a stateful application that requires persistent storage in Kubernetes. 
+	How would you configure persistent storage for this application?
+# Scenario_3
+	You're experiencing performance issues with your Kubernetes cluster.
+	How would you diagnose and resolve these issues?
+# Scenario_4
+	You need to deploy a kubernetes application across multiple environments(Dev, Staging, Prod) with different configurations.
+	How would you manage environment-specific configurations in Kubernetes?
+# Scenario_5
+	Your team wants to implement rolling updates for a Kubernetes deployment to minimize downtime during application upgrades.
+	How would you achieve this?
+
+	
+	
+
